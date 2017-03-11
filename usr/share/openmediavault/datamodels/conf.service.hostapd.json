@@ -1,0 +1,42 @@
+{
+	"type": "config",
+	"id": "conf.service.hostapd",
+	"title": "hostapd",
+	"queryinfo": {
+		"xpath": "//services/hostapd",
+		"iterable": false
+	},
+	"properties": {
+		"enable": {
+			"type": "boolean",
+			"default": 0
+		},
+		"wlan": {
+			"type": "string"
+		},
+		"ssid": {
+			"type": "string",
+			"default": "openmediavault"
+		},
+		"passphrase": {
+			"type": "string",
+			"default": "openmediavault"
+		},
+		"hw_mode": {
+			"type": "string",
+			"default": "a"
+		},
+		"channel": {
+			"type": "integer",
+			"default": 1
+		},
+		"country_code": {
+			"type": "string",
+			"default": "US"
+		},
+		"wpa_pass": {
+			"type": "string",
+			"default": "openmediavault"
+		}
+	}
+}

@@ -1,0 +1,6 @@
+Format: http://dep.debian.net/deps/dep5
+Upstream-Contact: OpenMediaVault Plugin Developers <plugins@omv-extras.org>
+Source: https://github.com/sbausis/openmediavault-hostapd
+Copyright: 2016 Simon Baur <sbausis@gmx.net>
+Copyright: 2013-2017 OpenMediaVault Plugin Developers <plugins@omv-extras.org>
+License: GPL-3

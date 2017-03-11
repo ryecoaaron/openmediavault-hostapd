@@ -1,0 +1,44 @@
+[{
+	"type": "rpc",
+	"id": "rpc.hostapd.set",
+	"params": {
+		"type": "object",
+		"properties": {
+		    "enable": {
+		        "type": "boolean",
+		        "required": true
+		    },
+			"wlan": {
+			    "type": "string",
+		        "required": true
+			},
+			"ssid": {
+			    "type": "string",
+		        "required": true
+			},
+			"passphrase": {
+			    "type": "string",
+		        "required": true
+			},
+			"hw_mode": {
+			    "type": "string",
+				"enum": [ "a", "b", "g" ],
+		        "required": true
+			},
+			"channel": {
+			    "type": "integer",
+				"minimum": 0,
+				"maximum": 80,
+		        "required": true
+			},
+			"country_code": {
+			    "type": "string",
+		        "required": true
+			},
+			"wpa_pass": {
+			    "type": "string",
+		        "required": true
+			}
+		}
+	}
+}]

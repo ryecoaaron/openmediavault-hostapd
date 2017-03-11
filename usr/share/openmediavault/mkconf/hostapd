@@ -1,0 +1,83 @@
+#!/bin/sh
+#
+# @license   http://www.gnu.org/licenses/gpl.html GPL Version 3
+# @author    OpenMediaVault Plugin Developers <plugins@omv-extras.org>
+# @copyright Copyright (c) 2013-2017 OpenMediaVault Plugin Developers
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+# See https://w1.fi/cgit/hostap/plain/hostapd/hostapd.conf for config
+# info.
+
+set -e
+
+. /etc/default/openmediavault
+. /usr/share/openmediavault/scripts/helper-functions
+
+HOSTAPD_CONFIG="/etc/hostapd.conf"
+
+echo "# This file is generated" > ${HOSTAPD_CONFIG}
+
+# Create hostapd config file
+xmlstarlet sel -t -m "//services/hostapd" \
+    -v "concat('interface=',wlan)" -n \
+    -o "bridge=br0" -n \
+    -o "logger_syslog=-1" -n \
+    -o "logger_syslog_level=2" -n \
+    -o "logger_stdout=-1" -n \
+    -o "logger_stdout_level=2" -n \
+    -o "ctrl_interface=/var/run/hostapd" -n \
+    -o "ctrl_interface_group=0" -n \
+    -v "concat('ssid=',ssid)" -n \
+    -v "concat('country_code=',country_code)" -n \
+    -v "concat('hw_mode=',hw_mode)" -n \
+    -v "concat('channel=',channel)" -n \
+    -o "wpa=2" -n \
+    -v "concat('wpa_passphrase=',wpa_pass)" -n \
+    -o "wpa_key_mgmt=WPA-PSK" -n \
+    -o "beacon_int=100" -n \
+    -o "dtim_period=2" -n \
+    -o "max_num_sta=255" -n \
+    -o "rts_threshold=-1" -n \
+    -o "fragm_threshold=-1" -n \
+    -o "macaddr_acl=0" -n \
+    -o "auth_algs=3" -n \
+    -o "ignore_broadcast_ssid=0" -n \
+    -o "wmm_enabled=1" -n \
+    -o "wmm_ac_bk_cwmin=4" -n \
+    -o "wmm_ac_bk_cwmax=10" -n \
+    -o "wmm_ac_bk_aifs=7" -n \
+    -o "wmm_ac_bk_txop_limit=0" -n \
+    -o "wmm_ac_bk_acm=0" -n \
+    -o "wmm_ac_be_aifs=3" -n \
+    -o "wmm_ac_be_cwmin=4" -n \
+    -o "wmm_ac_be_cwmax=10" -n \
+    -o "wmm_ac_be_txop_limit=0" -n \
+    -o "wmm_ac_be_acm=0" -n \
+    -o "wmm_ac_vi_aifs=2" -n \
+    -o "wmm_ac_vi_cwmin=3" -n \
+    -o "wmm_ac_vi_cwmax=4" -n \
+    -o "wmm_ac_vi_txop_limit=94" -n \
+    -o "wmm_ac_vi_acm=0" -n \
+    -o "wmm_ac_vo_aifs=2" -n \
+    -o "wmm_ac_vo_cwmin=2" -n \
+    -o "wmm_ac_vo_cwmax=3" -n \
+    -o "wmm_ac_vo_txop_limit=47" -n \
+    -o "wmm_ac_vo_acm=0" -n \
+    -o "eapol_key_index_workaround=0" -n \
+    -o "eap_server=0" -n \
+    -o "own_ip_addr=127.0.0.1" -n \
+    ${OMV_CONFIG_FILE} | xmlstarlet unesc > ${HOSTAPD_CONFIG}
+
+exit 0

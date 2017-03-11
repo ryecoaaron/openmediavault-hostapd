@@ -1,0 +1,15 @@
+Source: openmediavault-hostapd
+Section: net
+XB-Plugin-Section: network
+Priority: optional
+Maintainer: OpenMediaVault Plugin Developers <plugins@omv-extras.org>
+Build-Depends: debhelper (>= 9.0.0 )
+Standards-Version: 3.9.6
+
+Package: openmediavault-hostapd
+Architecture: all
+Depends: hostapd,
+         openmediavault (>= 3.0.65),
+         ${misc:Depends}
+Description: OpenMediaVault hostapd
+ Create a host access point.
